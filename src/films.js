@@ -1,4 +1,4 @@
-//import {movies} from './data.js';
+
 // Exercise 1: Get the array of all directors.
 
 function getAllDirectors(array){
@@ -20,10 +20,9 @@ function getMoviesFromDirector(array, director) {
 function moviesAverageOfDirector(array, director) {
   let directors=getMoviesFromDirector(array, director)
   let score=directors.map(nota =>nota.score);
-  var average = ((score.reduce((a, b) => a + b))/score.length).toFixed(2);
+  var average =parseFloat(((score.reduce((a, b) => a + b))/score.length).toFixed(2));
+  console.log(average);
   return average;
-  
-
 }
 
 // Exercise 4:  Alphabetic order by title 
