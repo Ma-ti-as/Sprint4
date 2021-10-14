@@ -35,7 +35,8 @@ function orderAlphabetically(array) {
 // Exercise 5: Order by year, ascending
 function orderByYear(array) {
  //const order= array.sort((a,b) => a.year - b.year?1:-1)
-  const order= array.sort(function(a, b) {
+ const order=[...array]
+  order.sort(function(a, b) {
     if (a.year !== b.year) {
         return a.year - b.year
     }
@@ -64,7 +65,8 @@ function hoursToMinutes() {
 
 // Exercise 8: Get the best film of a year
 function bestFilmOfYear(year) {
-  let result=movies.filter(x=>x.year==year)
+  let result=[...movies];
+  result.filter(x=>x.year==year)
   const order= result.sort((a,b) => a.score > b.score?-1:1);
   const bestScore=order[0].score;
   const bestFilm=order.filter(x=>x.score==bestScore);
