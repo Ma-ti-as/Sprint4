@@ -52,25 +52,43 @@ function orderByYear(array) {
 // Exercise 6: Calculate the average of the movies in a category
 //Hauràs de crear una funció que rebi una categoria de pel·lícula,  
 //icalculi la mitjana de nota d'aquesta categoria (sobre el array de totes les pel·lícules).
-function moviesAverageByCategory() {
+function moviesAverageByCategory(array, category) {
+  var result = array.filter(x=>x.genre.includes(category));
+  var result2=result.filter(x=>x.score);
+  let score=result2.map(nota =>nota.score);
+  var average =parseFloat(((score.reduce((a, b) => a + b))/score.length).toFixed(2));
+  return average;
 
 }
 
 // Exercise 7: Modify the duration of movies to minutes
 //Has de crear una funció que rebent un array de pel·lícules, 
 //retorna un array amb estàs pel·lícules però amb la durada en minuts!
-function hoursToMinutes() {
-
+function hoursToMinutes(array) {
+  const moviesMin =[...array]
+  const hours = x => x.split("h", 1);
+  const minutes = x => x.split(" ").pop().split("min", 1);
+  moviesMin.map( newDuration => {
+    if(newDuration.duration.indexOf("min")!==-1 && newDuration.duration.indexOf("h")!==-1){
+      newDuration.duration = parseInt(hours(newDuration.duration)) * 60 + parseInt(minutes(newDuration.duration));
+    }
+    else if(newDuration.duration.indexOf("min")!==-1 && newDuration.duration.indexOf("h")===-1){
+      newDuration.duration = parseInt(minutes(newDuration.duration));
+    }
+    else{
+      newDuration.duration = parseInt(hours(newDuration.duration)) * 60;
+    }
+  });
+  return moviesMin;
 }
 
 // Exercise 8: Get the best film of a year
-function bestFilmOfYear(year) {
-  let result=[...movies];
-  result.filter(x=>x.year==year)
-  const order= result.sort((a,b) => a.score > b.score?-1:1);
-  const bestScore=order[0].score;
-  const bestFilm=order.filter(x=>x.score==bestScore);
-  return bestFilm;
+function bestFilmOfYear(array,year) {
+  const result=[...array];
+  const movieYear=result.filter(x=>x.year==year);
+  const bestScore= movieYear[0].score;
+  const bestMovie=movieYear.filter(x=>x.score==bestScore);
+  return bestMovie;
 }
 
 
